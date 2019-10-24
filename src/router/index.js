@@ -1,29 +1,91 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Router from 'vue-router'
 
-Vue.use(VueRouter)
+const Home = () => import('@/views/home/Home')
+const Login = () => import('@/views/login/Login')
+const Introduction = () => import('@/views/introduction/Introduction')
+const Advice = () => import('@/views/advice/Advice')
+const Cadre = () => import('@/views/cadre/Cadre')
+const BigEvent = () => import('@/views/bigEvent/BigEvent')
+const Build = () => import('@/views/build/Build')
 
-const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+Vue.use(Router)
 
-const router = new VueRouter({
+const router = new Router({
+  name: 'router',
   mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+  base: '/xialin/',
+  routes: [
+    {
+      path: '/',
+      redirect: '/home'
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: Home
+    },
+    {
+      path: '/introduction',
+      name: 'introduction',
+      component: Introduction
+    },
+    {
+      path: '/cadre',
+      name: 'cadre',
+      component: Cadre,
+      meta: {
+        // requiresAuth: true
+      }
+    },
+    {
+      path: '/bigEvent',
+      name: 'bigEvent',
+      component: BigEvent
+    },
+    {
+      path: '/build',
+      name: 'build',
+      component: Build
+    },
+    {
+      path: '/advice',
+      name: 'advice',
+      component: Advice,
+      meta: {
+        // requiresAuth: true
+      }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    }
+  ],
+  scrollBehavior(to, from, savePosition) {
+    if (savePosition) {
+      return savePosition
+    } else {
+      return {
+        x: 0,
+        y: 0
+      }
+    }
+  }
 })
 
+router.beforeEach(function(to, from, next) {
+  if (to.meta.requiresAuth) {
+    const a = 0
+    if (a) {
+      next()
+    } else {
+      next({
+        path: '/login'
+      })
+    }
+  } else {
+    next()
+  }
+})
 export default router
