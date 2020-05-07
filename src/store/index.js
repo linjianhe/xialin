@@ -14,7 +14,7 @@ const getters = {
 }
 
 const mutations = {
-  SET_EXAMPLE(state, data){
+  SET_EXAMPLE(state, data) {
     state.example = data
   }
 }

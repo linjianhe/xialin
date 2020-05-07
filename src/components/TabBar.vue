@@ -29,9 +29,16 @@
         ]
       }
     },
+    mounted() {
+      const that = this
+      this.titles.filter(function(item, index) {
+        if (item.path === that.$route.fullPath) {
+          that.currentIndex = index
+        }
+      })
+    },
     methods: {
       chooseItem(index) {
-        console.log('点击了')
         this.currentIndex = index
         this.$router.push(this.titles[index].path)
       }
@@ -49,6 +56,7 @@
   .tabBar-item{
     position: relative;
     width: 100px;
+    flex: 1;
     color: #fff;
     cursor: pointer;
     &:last-child {

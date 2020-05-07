@@ -11,7 +11,7 @@
             <el-input type="password" v-model="ruleForm.password" auto-complete="off" placeholder="密码"></el-input>
         </el-form-item>
         <el-form-item style="width:100%;">
-            <el-button type="primary" style="width:100%;" class="login-btn">登 录
+            <el-button type="primary" style="width:100%;" class="login-btn" @click="login">登 录
             </el-button>
         </el-form-item>
         <div class="form-bottom">
@@ -28,8 +28,8 @@
       data() {
         return {
           ruleForm: {
-            account: '',
-            password: ''
+            account: 'linjianhel',
+            password: '123456'
           },
           rules: {
 
@@ -37,6 +37,32 @@
         }
       },
       methods: {
+        login() {
+          let data = {
+            name: this.ruleForm.account,
+            pass: this.ruleForm.password
+          }
+          this.$store.dispatch('login/Login', data).then((res) => {
+            console.log(res)
+            this.$store.commit('user/SET_USERINFO', sessionStorage.getItem('userInfo'))
+            if (res.code === 200) {
+              // 跳到目标页
+              if (this.$route.query.redirect) {
+                this.$router.push(this.$route.query.redirect)
+              } else {
+                this.$router.push('/home')
+              }
+            } else {
+              // 用户被冻结强制跳到信息中转站页
+              console.log('sdasdasd')
+            }
+        }).catch(err => {
+            this.$message({
+                type: 'error',
+                message: err
+            })
+        })
+        }
       }
   }
 </script>

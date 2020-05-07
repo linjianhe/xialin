@@ -10,7 +10,7 @@
           <span>下林村</span>
         </div>
       </div>
-      <TabBar/>
+      <TabBar class="tabBar" />
     </div>
     <img style="flex: 1" src="@/assets/img/header/top-bg.jpg"/>
   </div>
@@ -26,9 +26,8 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="less">
   .header{
-    /*background-color: #f6f6f6;*/
     width: 100%;
     position: relative;
     top: 0;
@@ -38,17 +37,20 @@
     display: flex;
     text-align: center;
   }
+  .header img {
+    margin-top: -20px;
+  }
   .header-center{
     display: flex;
     flex-direction: column;
   }
   .header-logo{
-    background-image: url('../assets/img/header/logo.jpg');
-    height: 157px;
+    background: url('../assets/img/header/logo.jpg') no-repeat 0 -20px;
+    height: 137px;
     width: 980px;
   }
   .name_1{
-    margin: 30px 0 0 -75px;
+    margin: 10px 0 0 -75px;
   }
   .name_1 span{
     font-size: 40px;

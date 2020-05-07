@@ -16,9 +16,12 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="less">
   .tabBarItem{
     display: flex;
+    &:hover {
+      color: aqua;
+    }
   }
   .tabBarItem img{
     width: 3px;
