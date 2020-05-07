@@ -1,6 +1,6 @@
 <template>
   <div class="tabBar">
-    <tabBarItem v-for="(item,index) in titles" :key="index" class="tabBar-item" >
+    <tabBarItem v-for="(item,index) in titles" :key="`index-${item.path}`" class="tabBar-item" >
       <div slot="title" :class="{active: currentIndex === index}" @click="chooseItem(index)">{{item.title}}</div>
     </tabBarItem>
   </div>
@@ -17,7 +17,7 @@
       return {
         currentIndex: 0,
         titles: [
-          {title: '网站主页', path: '/home'},
+          {title: '网站主页', path: '/index'},
           {title: '村子介绍', path: '/introduction'},
           {title: '两委班子', path: '/cadre'},
           {title: '村中大事记', path: '/bigEvent'},
@@ -39,7 +39,7 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="less">
   .tabBar{
     display: flex;
     width: 980px;
@@ -47,9 +47,23 @@
     background-image: url("../assets/img/header/nav_on.jpg");
   }
   .tabBar-item{
+    position: relative;
     width: 100px;
     color: #fff;
     cursor: pointer;
+    &:last-child {
+      ::after {
+        content: '';
+        position: absolute;
+        width: 3px;
+        height: 45px;
+        line-height: 45px;
+        top: 0;
+        right: 0;
+        background: url("../assets/img/header/nav_line.png") no-repeat;
+        background-size: 100% 100%;
+      }
+    }
   }
   .active{
     color: red;

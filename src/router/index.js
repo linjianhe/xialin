@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+const Index = () => import('@/views/index/Index')
 const Home = () => import('@/views/home/Home')
 const Login = () => import('@/views/login/Login')
 const Introduction = () => import('@/views/introduction/Introduction')
@@ -18,43 +19,51 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/home'
+      name: 'index',
+      redirect: '/index'
     },
     {
-      path: '/home',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/introduction',
-      name: 'introduction',
-      component: Introduction
-    },
-    {
-      path: '/cadre',
-      name: 'cadre',
-      component: Cadre,
-      meta: {
-        // requiresAuth: true
-      }
-    },
-    {
-      path: '/bigEvent',
-      name: 'bigEvent',
-      component: BigEvent
-    },
-    {
-      path: '/build',
-      name: 'build',
-      component: Build
-    },
-    {
-      path: '/advice',
-      name: 'advice',
-      component: Advice,
-      meta: {
-        // requiresAuth: true
-      }
+      path: '/index',
+      name: 'index',
+      component: Index,
+      children: [
+        {
+          path: '/index/home',
+          name: 'home',
+          component: Home
+        },
+        {
+          path: '/introduction',
+          name: 'introduction',
+          component: Introduction
+        },
+        {
+          path: '/cadre',
+          name: 'cadre',
+          component: Cadre,
+          meta: {
+            // requiresAuth: true
+          }
+        },
+        {
+          path: '/bigEvent',
+          name: 'bigEvent',
+          component: BigEvent
+        },
+        {
+          path: '/build',
+          name: 'build',
+          component: Build
+        },
+        {
+          path: '/advice',
+          name: 'advice',
+          component: Advice,
+          meta: {
+            // requiresAuth: true
+          }
+        }
+      ]
     },
     {
       path: '/login',

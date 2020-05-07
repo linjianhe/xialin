@@ -10,70 +10,111 @@
         <el-form-item prop="password">
             <el-input type="password" v-model="ruleForm.password" auto-complete="off" placeholder="密码"></el-input>
         </el-form-item>
-
         <el-form-item style="width:100%;">
-            <el-button type="primary" style="width:100%;">登录
+            <el-button type="primary" style="width:100%;" class="login-btn">登 录
             </el-button>
         </el-form-item>
+        <div class="form-bottom">
+          <span class="form-register">立即注册</span>
+          <span class="form-forgetPass">忘记密码</span>
+        </div>
       </el-form>
     </div>
   </div>
-  
 </template>
 
 <script>
   export default {
-      data(){
-        return{
-          ruleForm:{
-            account:'',
-            password:''
+      data() {
+        return {
+          ruleForm: {
+            account: '',
+            password: ''
           },
-          rules:{
+          rules: {
 
           }
         }
       },
-      methods:{
+      methods: {
       }
   }
 </script>
 
-<style>
+<style lang="less">
 .container{
   width: 100%;
   height: 100%;
+  min-width: 450px;
   position: relative;
-  z-index: 1;
-  background: url("../../assets/img/bg.jpg") center/cover fixed;
-  justify-content: center;
+  background: url("../../assets/img/login_bg.jpg") no-repeat fixed;
+  background-size: 100% 100%;
+  box-sizing:border-box;
+  display: flex;
   align-items: center;
-  overflow-y: auto;
+  justify-content: center;
 }
 .login{
   width: 350px;
-  margin: 200px auto;
-  padding: 50px;
-  z-index: 10;
-  border:1px solid #ccc;
-  transition: 0.2s ease;
-  border-radius: 4px;
-  transition-delay: 0.3s;
+  padding: 10px 50px 30px;
+  position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+  z-index: 11;
+  border:1px solid #aaa;
+  border-radius: 6px;
+  box-shadow:  0 0 8px 6px rgba(0,0,0,.5);
+  &:hover {
+    // background: inherit;
+    // transition: 0.2s ease;
+    // transition-delay: 0.3s;
+  }
 }
 .demo-ruleForm{
-  position: relative;
-  width: 350px;
-  padding: 25px 25px 30px 25px;
-  box-sizing: border-box;
-  overflow: hidden;
+  .title {
+    color: #ffffff;
+  }
+  .el-input__inner {
+    background: none;
+    color: #fff;
+  }
+  .login-btn {
+    background-color: #fff;
+    border: none;
+    color: #537E0D;
+    font-size: 16px;
+    border: 1px solid #fff;
+    &:hover {
+      border: 1px solid #409EFF;
+    }
+  }
+  .form-bottom {
+    color: #fff;
+    display: flex;
+    font-size: 12px;
+    .form-register {
+      margin-right: auto;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .form-forgetPass {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 }
-.login::before{
+.container:after{
   content: "";
+  width: 100%;
+  height: 100%;
   position: absolute;
-  top: -10px;
-  left: -10px;
-  background: url("../../assets/img/bg.jpg") center/cover fixed;
-  /* box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
-  filter: blur(5px) */
-} 
+  top: 0;
+  left: 0;
+  background: inherit;
+  filter: blur(3px);
+  z-index: 1;
+}
 </style>
